@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Saanvi 💧</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #fff5f5 0%, #fed7aa 100%);
+            --accent-pink: #fb923c;
+            --heart-red: #f87171;
+            --water-blue: #60a5fa;
+            --text-main: #451a03;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            font-family: 'Quicksand', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            color: var(--text-main);
+            overflow: hidden;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 3rem 2rem;
+            border-radius: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            max-width: 380px;
+            width: 85%;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            margin: 0;
+            color: var(--heart-red);
+        }
+
+        .subtitle {
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+            display: block;
+            color: var(--accent-pink);
+        }
+
+        .water-icon {
+            font-size: 60px;
+            margin: 20px 0;
+            display: inline-block;
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15) rotate(5deg); }
+        }
+
+        .message {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        .btn-hydrate {
+            background: var(--water-blue);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(96, 165, 250, 0.3);
+        }
+
+        .btn-hydrate:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(96, 165, 250, 0.4);
+            background: #3b82f6;
+        }
+
+        .streak-counter {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .floating-emoji {
+            position: absolute;
+            pointer-events: none;
+            z-index: 100;
+            animation: rise 2s forwards ease-out;
+        }
+
+        @keyframes rise {
+            from { transform: translateY(0); opacity: 1; }
+            to { transform: translateY(-200px); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <span class="subtitle">Hydration Reminder</span>
+        <h1>Saanvi</h1>
+        <div class="water-icon">🥤</div>
+        <p class="message">
+            Hey Saanvi! Just checking in. <br>
+            You're doing great things today, but don't forget to take a <b>sip of water</b> right now. ✨
+        </p>
+        
+        <button class="btn-hydrate" onclick="drinkWater()">I drank some! 💧</button>
+
+        <div class="streak-counter">
+            Saanvi's Hydration Streak: <span id="streak">0</span>
+        </div>
+    </div>
+
+    <script>
+        let count = localStorage.getItem('saanviStreak') || 0;
+        document.getElementById('streak').innerText = count;
+
+        function drinkWater() {
+            count++;
+            localStorage.setItem('saanviStreak', count);
+            document.getElementById('streak').innerText = count;
+
+            const emojis = ['💧', '💖', '✨', '🌸', '🌊'];
+            
+            for(let i=0; i<12; i++) {
+                const el = document.createElement('div');
+                el.className = 'floating-emoji';
+                el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                el.style.left = (Math.random() * 80 + 10) + '%';
+                el.style.top = '40%';
+                el.style.fontSize = '24px';
+                document.body.appendChild(el);
+                
+                setTimeout(() => el.remove(), 2000);
+            }
+        }
+    </script>
+</body>
+</html>
